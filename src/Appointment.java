@@ -1,6 +1,7 @@
 import java.sql.Date;
 import java.util.Scanner;
 import java.util.*;
+import java.sql.ResultSet;
 import java.sql.*;
 public class Appointment {
     public static void addAppointment(){
@@ -41,6 +42,32 @@ public class Appointment {
         }
 
 
+    }
+    public static void viewAppointment(){
+        try{
+            Connection conn=DBConnection.getConnection();
+            String sql="SELECT * FROM APPOINTMENT ";
+            Statement smt=conn.createStatement();
+            ResultSet rs=smt.executeQuery(sql);
+            while(rs.next()){
+                int id=rs.getInt("id");
+                int doctor_id=rs.getInt("doctor_id");
+                int patient_id=rs.getInt("patient_id");
+                Date date=rs.getDate("date");
+                Time time=rs.getTime("time");
+
+                System.out.println(" ID "+ id +
+                                   " DOCTOR ID "+ doctor_id+
+                                   " PATIENT ID "+ patient_id+
+                                   " DATE "+ date+
+                                   " TIME "+time);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error at fetching appointment ");
+            e.printStackTrace();
+
+        }
     }
 
 }
