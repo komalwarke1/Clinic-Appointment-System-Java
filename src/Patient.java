@@ -76,4 +76,44 @@ public class Patient {
 
         }
     }
+    public static void updatePatient(){
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter Patient ID to update: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter patient name to update ");
+        String name=sc.nextLine();
+
+        System.out.println("Enter patient age to update ");
+        int age=sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter patient gender to update ");
+        String gender=sc.next();
+
+        try{
+            Connection conn=DBConnection.getConnection();
+            String sql="UPDATE PATIENT SET NAME=? ,AGE=? ,GENDER=? WHERE ID=?";
+            PreparedStatement pre=conn.prepareStatement(sql);
+            pre.setString(1,name);
+            pre.setInt(2,age);
+            pre.setString(3,gender);
+            pre.setInt(4,id);
+
+            int rows=pre.executeUpdate();
+
+            if(rows>0){
+                System.out.println("Patient information updated successfully");
+            }else{
+                System.out.println("Patient id not found");
+            }
+        }catch(Exception e){
+            System.out.println("Error at update patient");
+            e.printStackTrace();
+        }
+
+
+
+    }
 }
