@@ -1,7 +1,6 @@
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.Scanner;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 public class Patient {
     public static void addPatient(){
         Scanner sc=new Scanner(System.in);
@@ -28,6 +27,26 @@ public class Patient {
             pre.close();
             conn.close();
         }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void viewPatient(){
+        try{
+            Connection conn=DBConnection.getConnection();
+            String sql="SELECT * FROM PATIENT ";
+            Statement smt=conn.createStatement();
+            ResultSet rs=smt.executeQuery(sql);
+            while(rs.next()){
+                String name=rs.getString("name");
+                int age=rs.getInt("age");
+                String gender=rs.getString("gender");
+                System.out.println(" Name "+name+
+                                   " Age "+age+
+                                   " Gender "+gender);
+            }
+
+        }catch(Exception e){
+            System.out.println("Error at fetching patient data");
             e.printStackTrace();
         }
     }
