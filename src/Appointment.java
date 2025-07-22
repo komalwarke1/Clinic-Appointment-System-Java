@@ -69,5 +69,27 @@ public class Appointment {
 
         }
     }
+    public static void deleteAppointment(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Appointment Id to delete");
+        int id=sc.nextInt();
+        try{
+            Connection conn=DBConnection.getConnection();
+            String sql="DELETE FROM APPOINTMENT WHERE ID = ?";
+            PreparedStatement pre=conn.prepareStatement(sql);
+            pre.setInt(1,id);
+
+            int rows=pre.executeUpdate();
+            if(rows>0){
+                System.out.println("Appointment deleted successfully");
+            }else{
+                System.out.println("Appointment not found");
+            }
+
+        }catch (Exception e){
+            System.out.println("Error at delete appointment");
+            e.printStackTrace();
+        }
+    }
 
 }
