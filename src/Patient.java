@@ -50,4 +50,30 @@ public class Patient {
             e.printStackTrace();
         }
     }
+
+    public static void deletePatient(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter patient id to delete");
+        int id=sc.nextInt();
+
+        try{
+            Connection conn=DBConnection.getConnection();
+            String sql="DELETE FROM PATIENT WHERE ID=?";
+            PreparedStatement pre=conn.prepareStatement(sql);
+            pre.setInt(1,id);
+            int rows=pre.executeUpdate();
+            if(rows>0){
+                System.out.println("Patient deleted successfully");
+            }else{
+                System.out.println("No patient found of the ID");
+            }
+
+        }catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println("Cannot delete patient. Appointment exists for this patient.");
+        }catch(Exception e){
+            System.out.println("Error at delete patient");
+            e.printStackTrace();
+
+        }
+    }
 }
