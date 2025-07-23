@@ -92,4 +92,49 @@ public class Appointment {
         }
     }
 
+    public static void viewAppointmentByDate(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter date(yyyy-mm-dd) for view appointment");
+        String inputDate=sc.nextLine();
+        try{
+            Date date=Date.valueOf(inputDate);
+            Connection conn=DBConnection.getConnection();
+            String sql = "SELECT A.id, D.name AS doctor_name, P.name AS patient_name, A.time " +
+                    "FROM appointment A " +
+                    "JOIN doctor D ON A.doctor_id = D.id " +
+                    "JOIN patient P ON A.patient_id = P.id " +
+                    "WHERE A.date = ?";
+
+
+            PreparedStatement pre=conn.prepareStatement(sql);
+            pre.setDate(1,date);
+            ResultSet rs=pre.executeQuery();
+            System.out.println("Appointments for "+date +"-----");
+            boolean found=false;
+            while(rs.next()){
+                found=true;
+                int id=rs.getInt("id");
+                String docname=rs.getString("doctor_name");
+                String patname=rs.getString("patient_name");
+                Time time=rs.getTime("time");
+
+                System.out.println("Appointment id = " +id+
+                                   "Doctor name = " +docname+
+                                   "Patient name = " +patname+
+                                   "Time ="+time);
+
+            }
+            if(!found){
+                System.out.println("Appoitmant for date "+date+" not available");
+            }
+            conn.close();
+
+        }catch(IllegalArgumentException e){
+            System.out.println("Invalid date format");
+        }catch(Exception e){
+            System.out.println("Error at view appointment by date");
+            e.printStackTrace();
+        }
+    }
+
 }
