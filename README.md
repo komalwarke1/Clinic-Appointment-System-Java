@@ -6,7 +6,7 @@ A Java-based mini project that allows clinics to manage doctors, patients, and a
 
 ---
 
-## ✅ Features:
+## Features:
 - Add, view, and manage **doctors**
 - Add, view, and manage **patients**
 - Book, view, and delete **appointments**
@@ -16,7 +16,7 @@ A Java-based mini project that allows clinics to manage doctors, patients, and a
 
 ---
 
-## 🛠️ Technologies Used:
+## Technologies Used:
 - Java
 - JDBC (Java Database Connectivity)
 - MySQL
@@ -25,7 +25,7 @@ A Java-based mini project that allows clinics to manage doctors, patients, and a
 
 ---
 
-## 🗄️ Database Schema:
+## Database Schema:
 
 - **Doctor** (`id`, `name`, `specialization`)
 - **Patient** (`id`, `name`, `age`, `gender`)
@@ -33,7 +33,7 @@ A Java-based mini project that allows clinics to manage doctors, patients, and a
 
 ---
 
-## 🚀 How to Run:
+## How to Run:
 1. Clone the repository  
 2. Import into IntelliJ  
 3. Set up your MySQL database and update DB credentials  
@@ -42,10 +42,3 @@ A Java-based mini project that allows clinics to manage doctors, patients, and a
 
 ---
 
-## Folder Structure:
-src/
-├── DBConnection.java
-├── Doctor.java
-├── Patient.java
-├── Appointment.java
-└── Main.java
