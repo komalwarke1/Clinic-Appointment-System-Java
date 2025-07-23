@@ -23,4 +23,24 @@ public class Doctor {
 
         }
     }
+    public static void viewDoctor(){
+        try{
+            Connection conn=DBConnection.getConnection();
+            String sql="SELECT * FROM DOCTOR ";
+            Statement smt=conn.createStatement();
+            ResultSet rs=smt.executeQuery(sql);
+            while(rs.next()){
+                int id=rs.getInt("id");
+                String name=rs.getString("name");
+                String specialization=rs.getString("specialization");
+                System.out.println(" ID "+id+
+                        " Name "+name+
+                        " Specialization "+specialization);
+            }
+
+        }catch(Exception e){
+            System.out.println("Error at fetching doctor data");
+            e.printStackTrace();
+        }
+    }
 }

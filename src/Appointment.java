@@ -118,10 +118,10 @@ public class Appointment {
                 String patname=rs.getString("patient_name");
                 Time time=rs.getTime("time");
 
-                System.out.println("Appointment id = " +id+
-                                   "Doctor name = " +docname+
-                                   "Patient name = " +patname+
-                                   "Time ="+time);
+                System.out.println(" Appointment id = " +id+
+                                   " Doctor name = " +docname+
+                                   " Patient name = " +patname+
+                                   " Time = "+time);
 
             }
             if(!found){
